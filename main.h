@@ -108,6 +108,7 @@ char buffer[],
 
 /****************** UTILS ******************/
 int is_printable(char);
+int is_printable(char c);
 int append_hexa_code(char, char[], int);
 int is_digit(char);
 
