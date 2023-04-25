@@ -5,39 +5,39 @@
 /**
  * print_char - Prints a char
  * @types: List a of arguments
- * @bilal2: Buffer array to handle print
- * @bilal3:  Calculates active bilal3
+ * @buffer: Buffer array to handle print
+ * @flags:  Calculates active flags
  * @width: Width
  * @precision: Precision specification
  * @size: Size specifier
  * Return: Number of chars printed
  */
-int print_char(bilal1, char bilal2[],
-	int bilal3, int width, int precision, int size)
+int print_char(va_list types, char buffer[],
+	int flags, int width, int precision, int size)
 {
 	char c = va_arg(types, int);
 
-	return (handle_write_char(c, bilal2, bilal3, width, precision, size));
+	return (handle_write_char(c, buffer, flags, width, precision, size));
 }
 /************************* PRINT A STRING *************************/
 /**
  * print_string - Prints a string
  * @types: List a of arguments
- * @bilal2: Buffer array to handle print
- * @bilal3:  Calculates active bilal3
+ * @buffer: Buffer array to handle print
+ * @flags:  Calculates active flags
  * @width: get width.
  * @precision: Precision specification
  * @size: Size specifier
  * Return: Number of chars printed
  */
-int print_string(bilal1, char bilal2[],
-	int bilal3, int width, int precision, int size)
+int print_string(va_list types, char buffer[],
+	int flags, int width, int precision, int size)
 {
 	int length = 0, i;
 	char *str = va_arg(types, char *);
 
-	UNUSED(bilal2);
-	UNUSED(bilal3);
+	UNUSED(buffer);
+	UNUSED(flags);
 	UNUSED(width);
 	UNUSED(precision);
 	UNUSED(size);
@@ -56,7 +56,7 @@ int print_string(bilal1, char bilal2[],
 
 	if (width > length)
 	{
-		if (bilal3 & F_MINUS)
+		if (flags & F_MINUS)
 		{
 			write(1, &str[0], length);
 			for (i = width - length; i > 0; i--)
@@ -78,19 +78,19 @@ int print_string(bilal1, char bilal2[],
 /**
  * print_percent - Prints a percent sign
  * @types: Lista of arguments
- * @bilal2: Buffer array to handle print
- * @bilal3:  Calculates active bilal3
+ * @buffer: Buffer array to handle print
+ * @flags:  Calculates active flags
  * @width: get width.
  * @precision: Precision specification
  * @size: Size specifier
  * Return: Number of chars printed
  */
-int print_percent(bilal1, char bilal2[],
-	int bilal3, int width, int precision, int size)
+int print_percent(va_list types, char buffer[],
+	int flags, int width, int precision, int size)
 {
 	UNUSED(types);
-	UNUSED(bilal2);
-	UNUSED(bilal3);
+	UNUSED(buffer);
+	UNUSED(flags);
 	UNUSED(width);
 	UNUSED(precision);
 	UNUSED(size);
@@ -101,15 +101,15 @@ int print_percent(bilal1, char bilal2[],
 /**
  * print_int - Print int
  * @types: Lista of arguments
- * @bilal2: Buffer array to handle print
- * @bilal3:  Calculates active bilal3
+ * @buffer: Buffer array to handle print
+ * @flags:  Calculates active flags
  * @width: get width.
  * @precision: Precision specification
  * @size: Size specifier
  * Return: Number of chars printed
  */
-int print_int(bilal1, char bilal2[],
-	int bilal3, int width, int precision, int size)
+int print_int(va_list types, char buffer[],
+	int flags, int width, int precision, int size)
 {
 	int i = BUFF_SIZE - 2;
 	int is_negative = 0;
@@ -119,9 +119,9 @@ int print_int(bilal1, char bilal2[],
 	n = convert_size_number(n, size);
 
 	if (n == 0)
-		bilal2[i--] = '0';
+		buffer[i--] = '0';
 
-	bilal2[BUFF_SIZE - 1] = '\0';
+	buffer[BUFF_SIZE - 1] = '\0';
 	num = (unsigned long int)n;
 
 	if (n < 0)
@@ -132,35 +132,35 @@ int print_int(bilal1, char bilal2[],
 
 	while (num > 0)
 	{
-		bilal2[i--] = (num % 10) + '0';
+		buffer[i--] = (num % 10) + '0';
 		num /= 10;
 	}
 
 	i++;
 
-	return (write_number(is_negative, i, bilal2, bilal3, width, precision, size));
+	return (write_number(is_negative, i, buffer, flags, width, precision, size));
 }
 
 /************************* PRINT BINARY *************************/
 /**
  * print_binary - Prints an unsigned number
  * @types: Lista of arguments
- * @bilal2: Buffer array to handle print
- * @bilal3:  Calculates active bilal3
+ * @buffer: Buffer array to handle print
+ * @flags:  Calculates active flags
  * @width: get width.
  * @precision: Precision specification
  * @size: Size specifier
  * Return: Numbers of char printed.
  */
-int print_binary(bilal1, char bilal2[],
-	int bilal3, int width, int precision, int size)
+int print_binary(va_list types, char buffer[],
+	int flags, int width, int precision, int size)
 {
 	unsigned int n, m, i, sum;
 	unsigned int a[32];
 	int count;
 
-	UNUSED(bilal2);
-	UNUSED(bilal3);
+	UNUSED(buffer);
+	UNUSED(flags);
 	UNUSED(width);
 	UNUSED(precision);
 	UNUSED(size);
