@@ -1,66 +1,66 @@
 #include "main.h"
 
-void print_buffer(char buffer[], int *buff_ind);
+void print_buffer(char buffer[], int *bilal5);
 
 /**
  * _printf - Printf function
- * @format: format.
+ * @bilal : bilal .
  * Return: Printed chars.
  */
-int _printf(const char *format, ...)
+int _printf(const char *bilal , ...)
 {
-	int i, printed = 0, printed_chars = 0;
-	int flags, width, precision, size, buff_ind = 0;
+	int i, bilal3 = 0, bilal1 = 0;
+	int bilal4, width, precision, size, bilal5 = 0;
 	va_list list;
 	char buffer[BUFF_SIZE];
 
-	if (format == NULL)
+	if (bilal  == NULL)
 		return (-1);
 
-	va_start(list, format);
+	va_start(list, bilal );
 
-	for (i = 0; format && format[i] != '\0'; i++)
+	for (i = 0; bilal  && bilal [i] != '\0'; i++)
 	{
-		if (format[i] != '%')
+		if (bilal [i] != '%')
 		{
-			buffer[buff_ind++] = format[i];
-			if (buff_ind == BUFF_SIZE)
-				print_buffer(buffer, &buff_ind);
-			/* write(1, &format[i], 1);*/
-			printed_chars++;
+			buffer[bilal5++] = bilal [i];
+			if (bilal5 == BUFF_SIZE)
+				print_buffer(buffer, &bilal5);
+			/* write(1, &bilal [i], 1);*/
+			bilal1++;
 		}
 		else
 		{
-			print_buffer(buffer, &buff_ind);
-			flags = get_flags(format, &i);
-			width = get_width(format, &i, list);
-			precision = get_precision(format, &i, list);
-			size = get_size(format, &i);
+			print_buffer(buffer, &bilal5);
+			bilal4 = get_bilal4(bilal , &i);
+			width = get_width(bilal , &i, list);
+			precision = get_precision(bilal , &i, list);
+			size = get_size(bilal , &i);
 			++i;
-			printed = handle_print(format, &i, list, buffer,
-				flags, width, precision, size);
-			if (printed == -1)
+			bilal3 = handle_print(bilal , &i, list, buffer,
+				bilal4, width, precision, size);
+			if (bilal3 == -1)
 				return (-1);
-			printed_chars += printed;
+			bilal1 += bilal3;
 		}
 	}
 
-	print_buffer(buffer, &buff_ind);
+	print_buffer(buffer, &bilal5);
 
 	va_end(list);
 
-	return (printed_chars);
+	return (bilal1);
 }
 
 /**
  * print_buffer - Prints the contents of the buffer if it exist
  * @buffer: Array of chars
- * @buff_ind: Index at which to add next char, represents the length.
+ * @bilal5: Index at which to add next char, represents the length.
  */
-void print_buffer(char buffer[], int *buff_ind)
+void print_buffer(char buffer[], int *bilal5)
 {
-	if (*buff_ind > 0)
-		write(1, &buffer[0], *buff_ind);
+	if (*bilal5 > 0)
+		write(1, &buffer[0], *bilal5);
 
-	*buff_ind = 0;
+	*bilal5 = 0;
 }
